@@ -160,8 +160,12 @@ def send_message():
     current_step = chat_state['current_step']
     current_step_data = CHAT_STEPS.get(current_step, {})
     
-    # Handle negative responses
-    if is_negative_response(user_message):
+   
+     # if user enter(haan nahi/nahi haan)
+    if is_negative_response(user_message) and is_positive_response(user_message):
+        bot_response = 'Maaf kijiye, main samajh nahi paya. Kripya "Haan" ya "Nahi" mein jawab dijiye.'
+      # Handle negative responses   
+    elif is_negative_response(user_message):
         if current_step == 'eligibility' and 'biology nahi padhi' in user_message.lower():
             chat_state['current_step'] = 'biology_required'
             chat_state['step_history'].append(current_step)
